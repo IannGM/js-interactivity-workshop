@@ -80,6 +80,60 @@
     </svg>
 </div>
 <script>
+const imgBox = document.getElementById('img-box');
+imgBox.addEventListener('click', moveCat);
+const cat = document.getElementById('cat')
+function moveCat(){
+    console.log(cat);
+    
+    if(cat.style.marginTop == '100%'){
+        cat.style.marginTop = '0px';
+    } else {
+        cat.style.marginTop = '100%';
+    }
+}
+function randomColor(){
+    let red = Math.floor(Math.random()*256);
+    let green = Math.floor(Math.random()*256);
+    let blue = Math.floor(Math.random()*256);
+    //console.log(red+','+ green+','+blue);
+    
+    imgBox.style.backgroundColor = 'rgb(' +red+ ',' +green+ ',' +blue+')';
+}
+
+imgBox.addEventListener('mouseover', function(event){
+    hoverFunction(event);
+    //console.log(event.clientX);
+});
+
+const nose = document.getElementById('nose');
+
+function hoverFunction(event){
+    let xPos = event.clientX;
+    let yPos = event.clientY;
+
+    let boxlocation = imgBox.getBoundingClientRect();
+    let boxX = boxlocation.x;
+    let boxY = boxlocation.y;
+
+    let mouseX = xPos - boxX;
+    let mouseY = yPos - boxY;
+    //console.log('mouse:'+xPos+','+yPos);
+    //console.log('box location:'+boxX+','+boxY);
+    //console.log('relative mouse:'+mouseX+','+mouseY);
+
+    let nosePos = nose.getBBox();
+    let noseX = nosePos.x;
+    let noseY = nosePos.y;
+
+    let realX = mouseX - noseX;
+    let realY = mouseY - noseY;
+
+    nose.setAttribute('transform', 'translate('+realX+','+realY+')');
+
+    console.log(nosePos);
+}
+
 
 
 </script> 
